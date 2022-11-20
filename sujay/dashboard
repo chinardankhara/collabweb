@@ -1,0 +1,64 @@
+{
+  "title": "OpenAlex Related To Attribute",
+  "version": "2.2",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {
+      "undefined": ""
+    }
+  },
+  "pages": [
+    {
+      "title": "Main Page",
+      "reports": [
+        {
+          "title": "Graph",
+          "query": "MATCH (n)-[e]->(m) RETURN n,e,m LIMIT 20\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "graph",
+          "selection": {
+            "Work": "id"
+          },
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "Titles of Related Works",
+          "query": "MATCH (n)-[e]->(m) RETURN n.title,e,m.title LIMIT 20\n\n\n",
+          "width": 12,
+          "height": 2,
+          "x": 0,
+          "y": 3,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "nodePositions": {},
+            "frozen": false
+          }
+        },
+        {
+          "title": "Raw JSON",
+          "query": "MATCH (n)-[e]->(m) RETURN n,e,m LIMIT 20\n\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 6,
+          "y": 0,
+          "type": "json",
+          "selection": {},
+          "settings": {
+            "nodePositions": {},
+            "frozen": false
+          }
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {}
+}
