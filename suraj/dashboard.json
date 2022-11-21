@@ -1,0 +1,95 @@
+{
+  "title": "Georgia Tech Authors and Works Dashboard",
+  "version": "2.2",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {}
+  },
+  "pages": [
+    {
+      "title": "Main Page",
+      "reports": [
+        {
+          "title": "Works Information",
+          "query": "Match (w:Work)\nReturn w.name as TOPIC, \nw.doi as DOI, w.id as OPENALEX_ID, w.pub_date as PUBLICATION_DATE, w.authors as NUMBER_OF_AUTHORS, w.referenced as NUMBER_OF_REFERENCED_WORKS\n\n\n",
+          "width": 12,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "nodePositions": {},
+            "transposed": false,
+            "backgroundColor": "#ffffff"
+          }
+        },
+        {
+          "title": "Authors Information",
+          "query": "Match (a:Author)\nReturn a.name as NAME, \na.orcid as ORCID, a.id as OPENALEX_ID\n\n\n",
+          "width": 7,
+          "height": 2,
+          "x": 0,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "Format of Works",
+          "query": "MATCH (w:Work)\nWITH w.genre as FORMAT\nRETURN FORMAT, COUNT(FORMAT) as COUNT",
+          "width": 5,
+          "height": 2,
+          "x": 7,
+          "y": 2,
+          "type": "pie",
+          "selection": {
+            "index": "FORMAT",
+            "value": "COUNT",
+            "key": "(none)"
+          },
+          "settings": {
+            "nodePositions": {},
+            "type": "Node Property"
+          }
+        },
+        {
+          "title": "Top 20 Works with Most Authors",
+          "query": "MATCH (w:Work)\nRETURN w.name as TITLE, w.authors as AUTHORS LIMIT 20\n\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 4,
+          "type": "bar",
+          "selection": {
+            "index": "TITLE",
+            "value": "AUTHORS",
+            "key": "(none)"
+          },
+          "settings": {}
+        },
+        {
+          "title": "Top 50 Works with Most Referenced Works",
+          "query": "MATCH (w:Work)\nRETURN w.name as TITLE, w.referenced as REFERENCED_WORKS LIMIT 50\n\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 7,
+          "type": "bar",
+          "selection": {
+            "index": "TITLE",
+            "value": "REFERENCED_WORKS",
+            "key": "(none)"
+          },
+          "settings": {}
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {}
+}
