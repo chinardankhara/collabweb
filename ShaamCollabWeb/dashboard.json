@@ -1,0 +1,71 @@
+{
+  "title": "Research Paper Relationships",
+  "version": "2.2",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {}
+  },
+  "pages": [
+    {
+      "title": "Main Page",
+      "reports": [
+        {
+          "title": "Papers with related Works between each other",
+          "query": "MATCH (w:ResearchPapers)\nWITH w.related as FORMAT \n\nRETURN FORMAT, COUNT(FORMAT) as COUNT\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Graph of Research Papers",
+          "query": "Match (n) return n ",
+          "width": 3,
+          "height": 2,
+          "x": 3,
+          "y": 2,
+          "type": "graph",
+          "selection": {
+            "ResearchPapers": "title"
+          },
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "Research Papers information",
+          "query": "Match (w:ResearchPapers)\nReturn w.name as TOPIC, w.doi as DOI, w.id as OPENALEX_ID, w.pub_date as PUBLICATION_DATE, w.authors as NUMBER_OF_AUTHORS, w.referenced as NUMBER_OF_REFERENCED_WORKS\n     ",
+          "width": 3,
+          "height": 2,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "Count of Research Papers on a Topic",
+          "query": "\nMATCH (w:ResearchPapers) WITH w.title as FORMAT\nRETURN FORMAT, COUNT(FORMAT) as COUNT",
+          "width": 3,
+          "height": 2,
+          "x": 6,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "nodePositions": {}
+          }
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {}
+}
