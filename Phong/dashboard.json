@@ -1,0 +1,76 @@
+{
+  "title": "",
+  "version": "2.2",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {}
+  },
+  "pages": [
+    {
+      "title": "Main Page",
+      "reports": [
+        {
+          "title": "Hi there 👋",
+          "query": "call apoc.load.json(\"https://api.openalex.org/works?mailto=cdaknhara3@gatech.edu&page=1&per-page=200&filter=is_paratext:false,is_retracted:false,authorships.institutions.id:https://openalex.org/I130701444\") yield value\n\n\n// create unique relation if a exists in b's related_works list\n// displays nodes with relations\nMATCH (a:Work), (b:Work) WHERE a.id IN b.related_works AND a.id <> b.id\nMERGE (a)-[r: RELATED_TO]->(b)\n\nWITH a, b\n\nRETURN a,b \n// display all nodes\n//MATCH (n) RETURN n LIMIT 200",
+          "width": 3,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "List of Created Product and their date",
+          "query": "//MATCH (n)-[e]->(m) RETURN n,e,m LIMIT 20\n\nMATCH (r: ResearchProduct)\nRETURN r.datePublished as date , r.title as title\n\n",
+          "width": 5,
+          "height": 2,
+          "x": 3,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "List of Research Paper and DOI ID",
+          "query": "MATCH (n: ResearchPapers)\nRETURN n.title as title, n.id as ID\n\n\n",
+          "width": 4,
+          "height": 2,
+          "x": 8,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "List of Research Papers information",
+          "query": "MATCH (n: ResearchPapers)\nRETURN n.datePublished as date, n.title as title, n.id as ID, n.related as related\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "List of Research Product information",
+          "query": "MATCH (n: ResearchProduct)\nRETURN n.datePublished as date, n.title as title, n.id as ID, n.related as related\n\n\n",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 5,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {}
+}
