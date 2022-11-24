@@ -1,0 +1,86 @@
+{
+  "title": "OpenAlex Works by Year",
+  "version": "2.2",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {}
+  },
+  "pages": [
+    {
+      "title": "Main Page",
+      "reports": [
+        {
+          "title": "Hi there 👋",
+          "query": "**This is your first dashboard!** \n \nYou can click (⋮) to edit this report, or add a new report to get started. You can run any Cypher query directly from each report and render data in a variety of formats. \n \nTip: try _renaming_ this report by editing the title text. You can also edit the dashboard header at the top of the screen.\n\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "text",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Graph of all works published by year",
+          "query": "MATCH (n)-[e]->(m) RETURN n,e,m LIMIT 300\n\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 3,
+          "y": 0,
+          "type": "graph",
+          "selection": {
+            "Work": "pub_date"
+          },
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "Table of all works and their name, doi, id, and publication date",
+          "query": "MATCH (n)-[e]->(m) RETURN n.name as Work_Name, n.doi as DOI, n.id as ID, n.pub_date as Publication_Date LIMIT 300\n\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Pie chart of how many works make up each year",
+          "query": "Match (n)-[e]->(m)\nRETURN m as Year, COUNT(n) as Work\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 9,
+          "y": 0,
+          "type": "pie",
+          "selection": {
+            "index": "Year",
+            "value": "Work",
+            "key": "(none)"
+          },
+          "settings": {}
+        },
+        {
+          "title": "Bar chart of number of works by year",
+          "query": "MATCH (n)-[e]->(m)\nRETURN m as Year, COUNT(n) as Work\nORDER BY m ASC\n\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 0,
+          "y": 2,
+          "type": "bar",
+          "selection": {
+            "index": "Year",
+            "value": "Work",
+            "key": "(none)"
+          },
+          "settings": {}
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {}
+}
